@@ -1,0 +1,780 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Tablero de Ingresos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: oklch(0.985 0 0);
+  --fg: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --muted: oklch(0.961 0 0);
+  --muted-fg: oklch(0.52 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.88 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-fg: oklch(0.985 0 0);
+  --ring: oklch(0.55 0 0);
+  --cen: oklch(0.56 0.10 185);
+  --cen-subtle: oklch(0.955 0.03 185);
+  --sar: oklch(0.60 0.13 65);
+  --sar-subtle: oklch(0.965 0.04 80);
+  --dep: oklch(0.55 0.14 280);
+  --dep-subtle: oklch(0.955 0.03 280);
+  --success: oklch(0.52 0.14 150);
+  --success-subtle: oklch(0.965 0.03 150);
+  --warning: oklch(0.55 0.12 75);
+  --warning-subtle: oklch(0.97 0.05 95);
+  --danger: oklch(0.55 0.20 27);
+  --danger-subtle: oklch(0.965 0.02 27);
+  --info: oklch(0.52 0.17 250);
+  --info-subtle: oklch(0.965 0.02 250);
+  --shadow: 0 1px 2px oklch(0 0 0 / 6%), 0 8px 24px oklch(0 0 0 / 6%);
+  --band: oklch(0.975 0.004 250);
+  --radius: 0.5rem;
+  --font: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: oklch(0.145 0 0);
+    --fg: oklch(0.975 0 0);
+    --card: oklch(0.195 0 0);
+    --muted: oklch(0.255 0 0);
+    --muted-fg: oklch(0.72 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 16%);
+    --primary: oklch(0.97 0 0);
+    --primary-fg: oklch(0.205 0 0);
+    --ring: oklch(0.75 0 0);
+    --cen: oklch(0.78 0.10 185);
+    --cen-subtle: oklch(0.32 0.05 185 / 55%);
+    --sar: oklch(0.82 0.13 80);
+    --sar-subtle: oklch(0.34 0.06 80 / 55%);
+    --dep: oklch(0.76 0.12 280);
+    --dep-subtle: oklch(0.32 0.06 280 / 55%);
+    --success: oklch(0.76 0.12 150);
+    --success-subtle: oklch(0.30 0.06 150 / 45%);
+    --warning: oklch(0.84 0.12 90);
+    --warning-subtle: oklch(0.32 0.06 90 / 45%);
+    --danger: oklch(0.72 0.16 27);
+    --danger-subtle: oklch(0.30 0.08 27 / 45%);
+    --info: oklch(0.74 0.12 250);
+    --info-subtle: oklch(0.30 0.07 250 / 45%);
+    --shadow: 0 1px 2px oklch(0 0 0 / 30%), 0 8px 24px oklch(0 0 0 / 25%);
+    --band: oklch(1 0 0 / 3.5%);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: oklch(0.145 0 0);
+  --fg: oklch(0.975 0 0);
+  --card: oklch(0.195 0 0);
+  --muted: oklch(0.255 0 0);
+  --muted-fg: oklch(0.72 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 16%);
+  --primary: oklch(0.97 0 0);
+  --primary-fg: oklch(0.205 0 0);
+  --ring: oklch(0.75 0 0);
+  --cen: oklch(0.78 0.10 185);
+  --cen-subtle: oklch(0.32 0.05 185 / 55%);
+  --sar: oklch(0.82 0.13 80);
+  --sar-subtle: oklch(0.34 0.06 80 / 55%);
+  --dep: oklch(0.76 0.12 280);
+  --dep-subtle: oklch(0.32 0.06 280 / 55%);
+  --success: oklch(0.76 0.12 150);
+  --success-subtle: oklch(0.30 0.06 150 / 45%);
+  --warning: oklch(0.84 0.12 90);
+  --warning-subtle: oklch(0.32 0.06 90 / 45%);
+  --danger: oklch(0.72 0.16 27);
+  --danger-subtle: oklch(0.30 0.08 27 / 45%);
+  --info: oklch(0.74 0.12 250);
+  --info-subtle: oklch(0.30 0.07 250 / 45%);
+  --shadow: 0 1px 2px oklch(0 0 0 / 30%), 0 8px 24px oklch(0 0 0 / 25%);
+  --band: oklch(1 0 0 / 3.5%);
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+  padding: 0 16px;
+  padding-block: 20px 40px;
+}
+.app { max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted-fg); }
+
+/* Encabezado */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.top h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.top p { margin: 2px 0 0; color: var(--muted-fg); }
+.top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.aviso { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--warning-subtle); color: var(--warning); font-weight: 500; }
+
+/* Botones */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--card); font-weight: 500; white-space: nowrap; }
+.btn:hover:not(:disabled) { background: var(--muted); }
+.btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+.btn-primary:hover:not(:disabled) { background: var(--primary); opacity: .9; }
+.btn:disabled { opacity: .45; }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn-ghost { border-color: transparent; background: transparent; }
+.btn-danger { color: var(--danger); }
+
+/* Tarjetas de resumen */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.kpi-label { font-size: 13px; color: var(--muted-fg); display: flex; align-items: center; gap: 6px; }
+.kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+.kpi-sub { font-size: 12px; color: var(--muted-fg); }
+.kpi.cen .kpi-value { color: var(--cen); }
+.kpi.sar .kpi-value { color: var(--sar); }
+.kpi.dep .kpi-value { color: var(--dep); }
+.dot { width: 9px; height: 9px; border-radius: 3px; display: inline-block; flex: none; }
+.dot.cen { background: var(--cen); } .dot.sar { background: var(--sar); } .dot.dep { background: var(--dep); }
+.bar { height: 6px; border-radius: 999px; background: var(--muted); overflow: hidden; margin-top: 6px; }
+.bar > span { display: block; height: 100%; background: var(--fg); border-radius: 999px; transition: width .25s ease; }
+
+/* Layout principal */
+.main { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 16px; align-items: start; }
+.panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+
+/* Panel izquierdo con deslizamiento */
+.lado { overflow: hidden; overflow: clip; position: sticky; top: env(safe-area-inset-top, 0px); }
+.carril { display: flex; width: 200%; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.carril.art { transform: translateX(-50%); }
+.vista { flex: 0 0 50%; width: 50%; min-width: 0; padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 150px); min-height: 420px; overflow-y: auto; }
+.vista-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.vista-head h2 { margin: 0; font-size: 14px; font-weight: 600; }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted-fg); cursor: pointer; }
+.check input { accent-color: var(--fg); width: 15px; height: 15px; }
+.lista { display: flex; flex-direction: column; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.item { width: 100%; text-align: left; border: 1px solid transparent; background: transparent; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px; }
+.item:hover { background: var(--muted); }
+.item.sel { border-color: var(--border); background: var(--muted); }
+.item-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.item-title { font-weight: 600; }
+.item-sub { font-size: 12.5px; color: var(--muted-fg); }
+.item-code { font-size: 12px; color: var(--muted-fg); }
+.vacio-lista { padding: 24px 8px; text-align: center; color: var(--muted-fg); }
+.volver { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 4px 6px; margin-left: -6px; border-radius: 6px; font-weight: 600; }
+.volver:hover { background: var(--muted); }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; line-height: 1.5; }
+.b-nuevo { background: var(--info-subtle); color: var(--info); }
+.b-curso { background: var(--warning-subtle); color: var(--warning); }
+.b-pend { background: var(--danger-subtle); color: var(--danger); }
+.b-proc { background: var(--success-subtle); color: var(--success); }
+.b-rep { background: var(--muted); color: var(--muted-fg); }
+.b-var { background: var(--info-subtle); color: var(--info); font-size: 10.5px; padding: 1px 6px; }
+
+/* Panel derecho */
+.derecha { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.vacio { padding: 56px 24px; text-align: center; color: var(--muted-fg); }
+.vacio strong { display: block; color: var(--fg); font-size: 16px; margin-bottom: 4px; }
+.remito-bar { padding: 14px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.remito-bar h2 { margin: 0; font-size: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.remito-bar p { margin: 2px 0 0; font-size: 13px; color: var(--muted-fg); }
+.acciones { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hint { font-size: 12px; color: var(--muted-fg); }
+.nota { margin: 0 16px 14px; padding: 10px 12px; border-radius: 8px; font-size: 13px; background: var(--muted); }
+.nota.pend { background: var(--danger-subtle); color: var(--fg); }
+.nota.proc { background: var(--success-subtle); color: var(--fg); }
+
+.ficha { padding: 16px; }
+.ficha-acciones { margin-left: auto; }
+.ficha h3 { margin: 4px 0 10px; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.ficha-top { display: flex; align-items: center; gap: 8px; color: var(--muted-fg); font-size: 13px; flex-wrap: wrap; }
+.datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 16px; margin: 0; }
+.datos dt { font-size: 12px; color: var(--muted-fg); }
+.datos dd { margin: 0; font-weight: 600; }
+
+/* Tabla */
+.tabla-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 980px; }
+th, td { padding: 8px 8px; text-align: center; white-space: nowrap; }
+thead th { font-size: 12px; font-weight: 600; color: var(--muted-fg); border-bottom: 1px solid var(--border); }
+thead tr.grupo th { padding-bottom: 2px; border-bottom: 0; color: var(--fg); }
+thead tr.grupo th.g { border-bottom: 1px solid var(--border); }
+th.izq, td.izq { text-align: left; }
+/* Grupos de columnas: borde entre grupos y franja alternada */
+col.cg { border-left: 1px solid var(--border); }
+col.cg-conf { border-right: 1px solid var(--border); }
+col.cg-stock, col.cg-prop { background: var(--band); }
+thead tr.grupo th.g { font-size: 12.5px; letter-spacing: 0.01em; padding-top: 10px; }
+tbody tr.fila td { border-bottom: 1px solid var(--border); }
+tbody tr.color-sep td { padding: 10px 8px 4px; text-align: left; font-weight: 600; font-size: 13px; border-bottom: 1px solid var(--border); background: var(--muted); }
+.c-cen { color: var(--cen); } .c-sar { color: var(--sar); } .c-dep { color: var(--dep); }
+.talle { font-weight: 700; font-size: 15px; }
+.ingreso { font-weight: 700; font-size: 15px; }
+.cero { color: var(--muted-fg); opacity: .6; }
+.sug { display: inline-flex; min-width: 30px; height: 28px; align-items: center; justify-content: center; border-radius: 7px; font-weight: 700; }
+.sug.cen { background: var(--cen-subtle); color: var(--cen); }
+.sug.sar { background: var(--sar-subtle); color: var(--sar); }
+.sug.dep { background: var(--dep-subtle); color: var(--dep); }
+.sug.z { background: transparent; color: var(--muted-fg); font-weight: 500; }
+.stepper { display: inline-flex; align-items: stretch; height: 38px; border: 1px solid var(--input); border-bottom-width: 3px; border-radius: 7px; background: var(--card); overflow: hidden; vertical-align: middle; }
+.stepper.cen { border-bottom-color: var(--cen); } .stepper.sar { border-bottom-color: var(--sar); }
+.stepper:focus-within { outline: 2px solid var(--ring); outline-offset: 1px; }
+.stepper.error { border-color: var(--danger); background: var(--danger-subtle); }
+.stepper.off { opacity: .6; }
+.campo { width: 40px; border: 0; background: transparent; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; padding: 0; }
+.campo:focus-visible { outline: none; }
+.pasos { display: flex; flex-direction: column; border-left: 1px solid var(--input); }
+.paso { flex: 1; width: 22px; border: 0; padding: 0; background: transparent; color: var(--muted-fg); font-size: 13px; font-weight: 700; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.paso + .paso { border-top: 1px solid var(--input); }
+.paso:hover:not(:disabled) { background: var(--muted); color: var(--fg); }
+.paso:disabled { opacity: .3; }
+.calc { display: inline-flex; width: 54px; height: 34px; align-items: center; justify-content: center; border-radius: 7px; border: 1px dashed var(--input); border-bottom: 3px solid var(--dep); font-weight: 700; }
+.calc.error { color: var(--danger); }
+.estado-celda { min-width: 150px; text-align: left; }
+.ok { display: inline-flex; align-items: center; gap: 6px; color: var(--success); font-weight: 600; font-size: 13px; }
+.chip { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: var(--muted); color: var(--muted-fg); }
+.chip.warn { background: var(--warning-subtle); color: var(--warning); }
+.err-msg { display: block; font-size: 11.5px; color: var(--danger); margin-top: 3px; white-space: normal; max-width: 170px; }
+.pie-tabla { padding: 12px 16px; font-size: 12.5px; color: var(--muted-fg); border-top: 1px solid var(--border); }
+
+/* Diálogos y hoja */
+.overlay { position: fixed; inset: 0; background: oklch(0 0 0 / 45%); display: flex; align-items: flex-start; justify-content: center; padding: 48px 16px; z-index: 50; overflow-y: auto; }
+.dialog { background: var(--card); color: var(--fg); border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(460px, 100%); padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.dialog h2 { margin: 0; font-size: 17px; }
+.dialog p { margin: 0; color: var(--muted-fg); }
+.dialog label { font-size: 13px; font-weight: 600; }
+.dialog textarea { width: 100%; min-height: 84px; border: 1px solid var(--input); border-radius: 8px; padding: 8px 10px; background: var(--card); resize: vertical; }
+.dialog .error-txt { color: var(--danger); font-size: 13px; }
+.dialog .acciones { justify-content: flex-end; }
+.hoja-wrap { width: min(980px, 100%); display: flex; flex-direction: column; gap: 10px; }
+.hoja-bar { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: oklch(0.98 0 0); font-size: 13px; flex-wrap: wrap; }
+.hoja { background: oklch(1 0 0); color: oklch(0.15 0 0); border-radius: 4px; padding: 32px 36px; box-shadow: 0 10px 40px oklch(0 0 0 / 35%); overflow-x: auto; }
+.hoja h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: 0.02em; }
+.hoja .meta { font-size: 12.5px; color: oklch(0.4 0 0); margin: 0 0 16px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.hoja table { min-width: 720px; font-size: 12.5px; }
+.hoja th { color: oklch(0.35 0 0); border-bottom: 1.5px solid oklch(0.2 0 0); font-weight: 600; }
+.hoja td { border-bottom: 1px solid oklch(0.9 0 0); }
+.hoja tfoot td { border-top: 1.5px solid oklch(0.2 0 0); border-bottom: 0; font-weight: 700; }
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--primary); color: var(--primary-fg); padding: 10px 16px; border-radius: 10px; box-shadow: var(--shadow); font-weight: 500; z-index: 60; max-width: calc(100% - 32px); }
+
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .lado { position: static; }
+  .vista { max-height: none; min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carril, .bar > span { transition: none; }
+}
+</style>
+
+<div class="app" id="app">
+  <header class="top">
+    <div>
+      <h1>Ingresos y distribución</h1>
+      <p>Cada caja que entra al depósito, con la propuesta de qué va a cada sucursal.</p>
+    </div>
+    <div class="top-actions">
+      <span class="aviso">Prototipo · remitos reales, stock y ventas de ejemplo</span>
+      <button class="btn btn-sm" id="reiniciar" type="button">Reiniciar demo</button>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-live="polite"></section>
+
+  <div class="main">
+    <aside class="panel lado" aria-label="Remitos">
+      <div class="carril" id="carril">
+        <div class="vista" id="vista-remitos"></div>
+        <div class="vista" id="vista-articulos"></div>
+      </div>
+    </aside>
+    <section class="derecha" id="derecha"></section>
+  </div>
+</div>
+<div id="capa"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const REMITOS = [{"codigo": "1D5E2E95E1482D141BE1AAA216690858468001", "numero": 922, "fecha": "2026-09-17T18:32", "remitoProveedor": "", "articulos": [{"codigo": "5000010", "nombre": "Remera flame con recorte y estampa", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 44900, "anterior": "", "variantes": [{"color": "01", "colorNombre": "Blanco", "talle": "M", "ingreso": 4, "nueva": true}, {"color": "01", "colorNombre": "Blanco", "talle": "S", "ingreso": 4, "nueva": true}]}]}, {"codigo": "19FAA226A1FDD114253198AA14050623118341", "numero": 918, "fecha": "2026-09-16T20:38", "remitoProveedor": "039-157014", "articulos": [{"codigo": "5010009", "nombre": "Camisa con frunce en manga", "rubro": "Camisas", "temporada": "Primavera 2026", "precio": 85000, "anterior": "2026-09-05", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 4, "nueva": true}, {"color": "10", "colorNombre": "Negro", "talle": "M", "ingreso": 4, "nueva": true}, {"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 4, "nueva": true}]}, {"codigo": "5060010", "nombre": "Blazer basico de punto roma", "rubro": "Blazers", "temporada": "Primavera 2026", "precio": 149000, "anterior": "2026-09-16", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 2, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "XL", "ingreso": 2, "nueva": true}, {"color": "OF", "colorNombre": "Off white", "talle": "L", "ingreso": 3, "nueva": true}, {"color": "OF", "colorNombre": "Off white", "talle": "M", "ingreso": 3, "nueva": true}, {"color": "OF", "colorNombre": "Off white", "talle": "S", "ingreso": 3, "nueva": true}, {"color": "OF", "colorNombre": "Off white", "talle": "XL", "ingreso": 2, "nueva": true}]}]}, {"codigo": "13735410713B7314F6C192B115087004442881", "numero": 917, "fecha": "2026-09-16T19:46", "remitoProveedor": "039-156994", "articulos": [{"codigo": "5000005", "nombre": "Remera de jersey cuello bote", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 32000, "anterior": "2026-09-11", "variantes": [{"color": "50", "colorNombre": "Amarillo", "talle": "M", "ingreso": 4, "nueva": true}, {"color": "50", "colorNombre": "Amarillo", "talle": "S", "ingreso": 4, "nueva": true}]}, {"codigo": "5000015", "nombre": "Remera c/estampa \"heaven sent\"", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 31000, "anterior": "2026-09-05", "variantes": [{"color": "67", "colorNombre": "Chocolate", "talle": "S", "ingreso": 2, "nueva": false}]}, {"codigo": "5020002", "nombre": "Vestido corto strapless de microfibra", "rubro": "Vestidos", "temporada": "Primavera 2026", "precio": 39900, "anterior": "2026-09-16", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "M", "ingreso": 5, "nueva": false}]}, {"codigo": "5030102", "nombre": "Short denim desflecado", "rubro": "Polleras/shorts", "temporada": "Primavera 2026", "precio": 85000, "anterior": "2026-09-03", "variantes": [{"color": "9J", "colorNombre": "Lavado jeans", "talle": "L", "ingreso": 2, "nueva": false}, {"color": "9J", "colorNombre": "Lavado jeans", "talle": "M", "ingreso": 4, "nueva": false}, {"color": "9J", "colorNombre": "Lavado jeans", "talle": "S", "ingreso": 2, "nueva": false}, {"color": "9J", "colorNombre": "Lavado jeans", "talle": "XL", "ingreso": 1, "nueva": false}]}, {"codigo": "5040101", "nombre": "Jean straight relax matizado c/roturas", "rubro": "Jeans", "temporada": "Primavera 2026", "precio": 119000, "anterior": "2026-09-05", "variantes": [{"color": "97", "colorNombre": "Matizado", "talle": "24", "ingreso": 1, "nueva": false}]}, {"codigo": "5040103", "nombre": "Jean stright relax matizado", "rubro": "Jeans", "temporada": "Primavera 2026", "precio": 112000, "anterior": "2026-09-11", "variantes": [{"color": "97", "colorNombre": "Matizado", "talle": "22", "ingreso": 1, "nueva": false}, {"color": "97", "colorNombre": "Matizado", "talle": "24", "ingreso": 1, "nueva": false}]}, {"codigo": "5040932", "nombre": "Jean flare high con tajo", "rubro": "Jeans", "temporada": "Primavera 2026", "precio": 149000, "anterior": "2026-09-05", "variantes": [{"color": "9J", "colorNombre": "Lavado jeans", "talle": "26", "ingreso": 2, "nueva": false}, {"color": "9J", "colorNombre": "Lavado jeans", "talle": "28", "ingreso": 1, "nueva": false}]}, {"codigo": "5040939", "nombre": "Jean flare high con recorte y tajo", "rubro": "Jeans", "temporada": "Primavera 2026", "precio": 129000, "anterior": "2026-09-09", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "22", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "28", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "30", "ingreso": 1, "nueva": false}]}, {"codigo": "5050002", "nombre": "Pollera larga de saten con tajo", "rubro": "Polleras/shorts", "temporada": "Primavera 2026", "precio": 60500, "anterior": "2026-09-11", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 1, "nueva": false}]}, {"codigo": "5060013", "nombre": "Campera satinada con cierre", "rubro": "Blazers", "temporada": "Primavera 2026", "precio": 189000, "anterior": "2026-09-11", "variantes": [{"color": "41", "colorNombre": "Bordo", "talle": "S", "ingreso": 1, "nueva": false}]}]}, {"codigo": "1D013AF221E5FE14995182B615900311976401", "numero": 916, "fecha": "2026-09-16T19:39", "remitoProveedor": "039-156996", "articulos": [{"codigo": "5000011", "nombre": "Remera de microtul estampada", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 31900, "anterior": "2026-09-16", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 3, "nueva": false}]}, {"codigo": "5000013", "nombre": "Remera de jersey estampada flores", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 41500, "anterior": "2026-09-11", "variantes": [{"color": "01", "colorNombre": "Blanco", "talle": "L", "ingreso": 2, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 3, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "M", "ingreso": 4, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 6, "nueva": false}]}, {"codigo": "5000014", "nombre": "Remera de morley,hombros descubiertos", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 42800, "anterior": "2026-09-11", "variantes": [{"color": "30", "colorNombre": "Verde", "talle": "L", "ingreso": 4, "nueva": false}, {"color": "30", "colorNombre": "Verde", "talle": "M", "ingreso": 2, "nueva": false}]}, {"codigo": "5000021", "nombre": "Remera estampada fast.....", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 32000, "anterior": "2026-08-22", "variantes": [{"color": "01", "colorNombre": "Blanco", "talle": "L", "ingreso": 5, "nueva": false}, {"color": "01", "colorNombre": "Blanco", "talle": "M", "ingreso": 5, "nueva": false}, {"color": "01", "colorNombre": "Blanco", "talle": "S", "ingreso": 5, "nueva": false}]}, {"codigo": "5000027", "nombre": "Remera escote v de morley", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 39800, "anterior": "2026-09-11", "variantes": [{"color": "04", "colorNombre": "Natural", "talle": "L", "ingreso": 1, "nueva": false}, {"color": "04", "colorNombre": "Natural", "talle": "M", "ingreso": 1, "nueva": false}, {"color": "04", "colorNombre": "Natural", "talle": "S", "ingreso": 2, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "M", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 1, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "M", "ingreso": 1, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "S", "ingreso": 2, "nueva": false}]}, {"codigo": "5000204", "nombre": "Musculosa de morley gastado escote v", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 29000, "anterior": "2026-09-11", "variantes": [{"color": "41", "colorNombre": "Bordo", "talle": "M", "ingreso": 1, "nueva": false}, {"color": "41", "colorNombre": "Bordo", "talle": "S", "ingreso": 1, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "L", "ingreso": 1, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "M", "ingreso": 5, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "S", "ingreso": 2, "nueva": false}]}]}, {"codigo": "1D57ABA8F1DB881475719BBB15220985171311", "numero": 915, "fecha": "2026-09-16T19:27", "remitoProveedor": "039-156995", "articulos": [{"codigo": "5000205", "nombre": "Musculosa de morley gastado envivada", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 29000, "anterior": "2026-09-05", "variantes": [{"color": "20", "colorNombre": "Azul", "talle": "L", "ingreso": 4, "nueva": false}, {"color": "20", "colorNombre": "Azul", "talle": "S", "ingreso": 4, "nueva": false}]}, {"codigo": "5000207", "nombre": "Musculosa de morley escote v envivada", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 39900, "anterior": "2026-09-05", "variantes": [{"color": "60", "colorNombre": "Marron", "talle": "M", "ingreso": 3, "nueva": false}]}, {"codigo": "5000212", "nombre": "Musculosa escote v con textura", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 31900, "anterior": "2026-09-12", "variantes": [{"color": "43", "colorNombre": "Rosa", "talle": "S", "ingreso": 2, "nueva": false}]}, {"codigo": "5000216", "nombre": "Musculosa morley gastado con strass", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 31900, "anterior": "2026-09-12", "variantes": [{"color": "30", "colorNombre": "Verde", "talle": "L", "ingreso": 4, "nueva": false}, {"color": "30", "colorNombre": "Verde", "talle": "M", "ingreso": 6, "nueva": false}, {"color": "30", "colorNombre": "Verde", "talle": "S", "ingreso": 3, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "M", "ingreso": 7, "nueva": false}, {"color": "60", "colorNombre": "Marron", "talle": "S", "ingreso": 6, "nueva": false}]}, {"codigo": "5000607", "nombre": "Body de encaje con strass y puntilla", "rubro": "Remeras", "temporada": "Primavera 2026", "precio": 49900, "anterior": "2026-09-05", "variantes": [{"color": "08", "colorNombre": "Crudo", "talle": "M", "ingreso": 3, "nueva": false}]}, {"codigo": "5010204", "nombre": "Blusa con volados", "rubro": "Camisas", "temporada": "Primavera 2026", "precio": 62500, "anterior": "2026-07-29", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 2, "nueva": false}]}, {"codigo": "5010206", "nombre": "Blusa hombros descubiertos c/botones", "rubro": "Camisas", "temporada": "Primavera 2026", "precio": 59800, "anterior": "2026-09-15", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 2, "nueva": false}]}, {"codigo": "5020002", "nombre": "Vestido corto strapless de microfibra", "rubro": "Vestidos", "temporada": "Primavera 2026", "precio": 39900, "anterior": "2026-08-22", "variantes": [{"color": "10", "colorNombre": "Negro", "talle": "L", "ingreso": 4, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "M", "ingreso": 1, "nueva": false}, {"color": "10", "colorNombre": "Negro", "talle": "S", "ingreso": 1, "nueva": false}]}]}];
+
+const HOY = new Date('2026-09-18T10:00:00');
+const USUARIO = 'Usuario del depósito';
+const PISO = 1;                        // mínimo de exhibición por sucursal
+const DESEMPATE = ['sar', 'cen'];      // Sarmiento primero
+const UB = { cen: 'Centenario', sar: 'Sarmiento', dep: 'Depósito' };
+const CLAVE_LS = 'ingresos-prototipo-v1';
+
+/* ---------- Utilidades ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const pesos = (n) => '$ ' + n.toLocaleString('es-AR');
+const dd = (n) => String(n).padStart(2, '0');
+function fecha(iso, conAnio = false) {
+  const d = new Date(iso);
+  return dd(d.getDate()) + '/' + dd(d.getMonth() + 1) + (conAnio ? '/' + d.getFullYear() : '');
+}
+const hora = (iso) => { const d = new Date(iso); return dd(d.getHours()) + ':' + dd(d.getMinutes()); };
+const ahora = () => { const d = new Date(); return '2026-09-18T' + dd(d.getHours()) + ':' + dd(d.getMinutes()) + ':00'; };
+function diasDesde(iso) { return Math.max(0, Math.floor((HOY - new Date(iso)) / 86400000)); }
+function hash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+const CURVA = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+function claveTalle(t) {
+  if (/^\d+$/.test(t)) return [1, Number(t), ''];
+  const i = CURVA.indexOf(String(t).toUpperCase());
+  return i >= 0 ? [0, i, ''] : [2, 0, String(t)];
+}
+function cmpTalle(a, b) { const x = claveTalle(a), y = claveTalle(b); return x[0] - y[0] || x[1] - y[1] || x[2].localeCompare(y[2]); }
+const claveVar = (art, v) => art.codigo + '|' + v.color + '|' + v.talle;
+
+/* ---------- Stock y ventas de ejemplo (deterministas) ---------- */
+const VAR = {};
+REMITOS.forEach((r) => r.articulos.forEach((a) => a.variantes.forEach((v) => {
+  const k = claveVar(a, v);
+  if (VAR[k]) { VAR[k].dep += v.ingreso; return; }
+  VAR[k] = {
+    dep: v.ingreso + (v.nueva ? 0 : hash(k + 'd') % 2),
+    cen: v.nueva ? 0 : hash(k + 'c') % 3,
+    sar: v.nueva ? 0 : hash(k + 's') % 3,
+    vCen: v.nueva ? null : hash(k + 'vc') % 8,
+    vSar: v.nueva ? null : hash(k + 'vs') % 8,
+  };
+})));
+
+/* ---------- El motor de Reposición: pisos + nivelación ---------- */
+function nivelar(proy, disponible) {
+  const orden = Object.keys(proy).sort((a, b) => proy[a] - proy[b] || DESEMPATE.indexOf(a) - DESEMPATE.indexOf(b));
+  const reparto = Object.fromEntries(orden.map((l) => [l, 0]));
+  const nivel = { ...proy };
+  const n = orden.length;
+  for (let i = 1; i <= n && disponible > 0; i++) {
+    const salto = i < n ? nivel[orden[i]] - nivel[orden[i - 1]] : null;
+    if (salto !== null && salto * i <= disponible) {
+      for (let j = 0; j < i; j++) { reparto[orden[j]] += salto; nivel[orden[j]] += salto; }
+      disponible -= salto * i;
+      continue;
+    }
+    const empatados = orden.slice(0, i).sort((a, b) => DESEMPATE.indexOf(a) - DESEMPATE.indexOf(b));
+    const porCabeza = Math.floor(disponible / i), resto = disponible % i;
+    empatados.forEach((l, j) => { reparto[l] += porCabeza + (j < resto ? 1 : 0); });
+    disponible = 0;
+  }
+  return reparto;
+}
+function sugerir(s) {
+  const disp = (l) => Math.max(0, s[l]);
+  const orden = ['cen', 'sar'].sort((a, b) => disp(a) - disp(b) || DESEMPATE.indexOf(a) - DESEMPATE.indexOf(b));
+  let libre = Math.max(0, s.dep);
+  const env = { cen: 0, sar: 0 };
+  orden.forEach((l) => { const e = Math.min(Math.max(0, PISO - disp(l)), libre); env[l] += e; libre -= e; });
+  const rep = nivelar({ cen: disp('cen') + env.cen, sar: disp('sar') + env.sar }, libre);
+  env.cen += rep.cen; env.sar += rep.sar;
+  return { cen: env.cen, sar: env.sar, dep: Math.max(0, s.dep) - env.cen - env.sar };
+}
+const SUG = Object.fromEntries(Object.entries(VAR).map(([k, s]) => [k, sugerir(s)]));
+const libreDe = (k) => Math.max(0, VAR[k].dep);
+
+/* ---------- Estado ---------- */
+function estadoInicial() {
+  const e = { remitos: {}, sel: { remito: null, articulo: null }, soloSinProcesar: true };
+  REMITOS.forEach((r) => { e.remitos[r.codigo] = { estado: 'nuevo', conf: {}, draft: {}, pendiente: null, procesado: null, reabierto: null, version: 0 }; });
+  return e;
+}
+/* Cada visita arranca en el estado inicial: el prototipo no recuerda nada entre aperturas.
+   Se borra además lo que hayan guardado versiones anteriores del prototipo. */
+let E = estadoInicial();
+try { localStorage.removeItem(CLAVE_LS); } catch (err) { /* sin almacenamiento: nada que borrar */ }
+function guardar() { /* sin persistencia a propósito */ }
+
+const remitoSel = () => REMITOS.find((r) => r.codigo === E.sel.remito) || null;
+const stR = (r) => E.remitos[r.codigo];
+const variantesDe = (r) => r.articulos.flatMap((a) => a.variantes.map((v) => ({ a, v, k: claveVar(a, v) })));
+const unidades = (r) => r.articulos.reduce((s, a) => s + a.variantes.reduce((t, v) => t + v.ingreso, 0), 0);
+function valores(r, k) {
+  const st = stR(r);
+  return st.draft[k] || (st.conf[k] ? { cen: st.conf[k].cen, sar: st.conf[k].sar } : { cen: SUG[k].cen, sar: SUG[k].sar });
+}
+function validar(k, val) {
+  const libre = libreDe(k);
+  if (![val.cen, val.sar].every((n) => Number.isInteger(n) && n >= 0)) return 'Solo números enteros, sin negativos.';
+  if (val.cen + val.sar > libre) return 'Supera lo que hay en el depósito (' + libre + ').';
+  return null;
+}
+function confirmada(r, k) {
+  const st = stR(r), c = st.conf[k]; if (!c) return false;
+  const d = st.draft[k];
+  return !d || (d.cen === c.cen && d.sar === c.sar);
+}
+const corregida = (c) => c && (c.cen !== c.sug.cen || c.sar !== c.sug.sar);
+
+/* ---------- Tarjetas ---------- */
+function renderKpis() {
+  const r = remitoSel();
+  if (!r) {
+    const sin = REMITOS.filter((x) => stR(x).estado !== 'procesado');
+    const pend = REMITOS.filter((x) => stR(x).estado === 'pendiente');
+    const viejo = pend.length ? Math.max(...pend.map((x) => diasDesde(stR(x).pendiente.at))) : null;
+    $('#kpis').innerHTML = `
+      <div class="kpi"><span class="kpi-label">Remitos sin procesar</span><span class="kpi-value num">${sin.length}</span><span class="kpi-sub">de ${REMITOS.length} en los últimos 14 días</span></div>
+      <div class="kpi"><span class="kpi-label">Unidades sin procesar</span><span class="kpi-value num">${sin.reduce((s, x) => s + unidades(x), 0)}</span><span class="kpi-sub">en cajas por repartir</span></div>
+      <div class="kpi"><span class="kpi-label">Pendiente más viejo</span><span class="kpi-value num">${viejo === null ? '—' : viejo === 0 ? 'Hoy' : viejo + (viejo === 1 ? ' día' : ' días')}</span><span class="kpi-sub">${pend.length ? pend.length + (pend.length === 1 ? ' remito pendiente' : ' remitos pendientes') : 'Ningún remito pendiente'}</span></div>`;
+    return;
+  }
+  const vs = variantesDe(r); const st = stR(r);
+  const conf = vs.filter(({ k }) => confirmada(r, k)).length;
+  const corr = vs.filter(({ k }) => confirmada(r, k) && corregida(st.conf[k])).length;
+  let cen = 0, sar = 0, dep = 0, sugeridas = 0;
+  vs.forEach(({ k }) => {
+    const val = confirmada(r, k) ? st.conf[k] : SUG[k];
+    cen += val.cen; sar += val.sar; dep += libreDe(k) - val.cen - val.sar;
+    if (!confirmada(r, k)) sugeridas += SUG[k].cen + SUG[k].sar;
+  });
+  const colores = new Set(vs.map(({ a, v }) => a.codigo + v.color)).size;
+  const sub = sugeridas ? 'incluye ' + sugeridas + ' u. sugeridas' : 'todo confirmado';
+  $('#kpis').innerHTML = `
+    <div class="kpi"><span class="kpi-label">Unidades en el remito</span><span class="kpi-value num">${unidades(r)}</span><span class="kpi-sub">${vs.length} talles de ${r.articulos.length} ${r.articulos.length === 1 ? 'producto' : 'productos'}, en ${colores} ${colores === 1 ? 'color' : 'colores'}</span></div>
+    <div class="kpi"><span class="kpi-label">Talles confirmados</span><span class="kpi-value num">${conf} de ${vs.length}</span><div class="bar"><span style="width:${vs.length ? (conf / vs.length) * 100 : 0}%"></span></div></div>
+    <div class="kpi"><span class="kpi-label">Correcciones</span><span class="kpi-value num">${corr}</span><span class="kpi-sub">quedan registradas con usuario y hora</span></div>
+    <div class="kpi cen"><span class="kpi-label"><span class="dot cen"></span>Para Centenario</span><span class="kpi-value num">${cen}</span><span class="kpi-sub">unidades · ${sub}</span></div>
+    <div class="kpi sar"><span class="kpi-label"><span class="dot sar"></span>Para Sarmiento</span><span class="kpi-value num">${sar}</span><span class="kpi-sub">unidades · ${sub}</span></div>
+    <div class="kpi dep"><span class="kpi-label"><span class="dot dep"></span>Queda en el depósito</span><span class="kpi-value num">${dep}</span><span class="kpi-sub">unidades</span></div>`;
+}
+
+/* ---------- Panel izquierdo ---------- */
+const ESTADOS = { nuevo: ['Nuevo', 'b-nuevo'], en_curso: ['En curso', 'b-curso'], pendiente: ['Pendiente', 'b-pend'], procesado: ['Procesado', 'b-proc'] };
+const badgeEstado = (e) => `<span class="badge ${ESTADOS[e][1]}">${ESTADOS[e][0]}</span>`;
+function renderRemitos() {
+  const lista = REMITOS.filter((r) => !E.soloSinProcesar || stR(r).estado !== 'procesado');
+  $('#vista-remitos').innerHTML = `
+    <div class="vista-head"><h2>Remitos de ingreso</h2>
+      <label class="check" for="solo"><input type="checkbox" id="solo" ${E.soloSinProcesar ? 'checked' : ''}> Solo sin procesar</label></div>
+    ${lista.length ? `<ul class="lista">${lista.map((r) => {
+      const st = stR(r);
+      const pend = st.estado === 'pendiente' ? `<span class="item-sub">${diasDesde(st.pendiente.at) === 0 ? 'Desde hoy' : 'Hace ' + diasDesde(st.pendiente.at) + (diasDesde(st.pendiente.at) === 1 ? ' día' : ' días')} · ${esc(st.pendiente.por)}${st.pendiente.motivo ? ' · «' + esc(st.pendiente.motivo) + '»' : ''}</span>` : '';
+      return `<li><button type="button" class="item ${E.sel.remito === r.codigo ? 'sel' : ''}" data-remito="${r.codigo}">
+        <span class="item-top"><span class="item-title">N° ${r.numero} · ${fecha(r.fecha)} ${hora(r.fecha)}</span>${badgeEstado(st.estado)}</span>
+        <span class="item-sub num">${unidades(r)} u. · ${r.articulos.length} ${r.articulos.length === 1 ? 'producto' : 'productos'}${r.remitoProveedor ? ' · Remito ' + esc(r.remitoProveedor) : ''}</span>${pend}
+      </button></li>`;
+    }).join('')}</ul>` : `<p class="vacio-lista">No queda ningún remito sin procesar. Destildá el filtro para ver los procesados.</p>`}`;
+}
+function renderArticulos() {
+  const r = remitoSel();
+  if (!r) { $('#vista-articulos').innerHTML = ''; return; }
+  $('#vista-articulos').innerHTML = `
+    <div class="vista-head"><button type="button" class="volver" id="volver" aria-label="Volver a los remitos">← Remitos</button>
+      <span class="item-code">N° ${r.numero}</span></div>
+    <ul class="lista">${r.articulos.map((a) => {
+      const total = a.variantes.length;
+      const conf = a.variantes.filter((v) => confirmada(r, claveVar(a, v))).length;
+      const colores = [...new Set(a.variantes.map((v) => v.colorNombre))];
+      const u = a.variantes.reduce((s, v) => s + v.ingreso, 0);
+      return `<li><button type="button" class="item ${E.sel.articulo === a.codigo ? 'sel' : ''}" data-articulo="${a.codigo}">
+        <span class="item-top"><span class="item-code">${a.codigo}</span><span class="badge ${a.anterior ? 'b-rep' : 'b-nuevo'}">${a.anterior ? 'Repetido' : 'Nuevo'}</span></span>
+        <span class="item-title">${esc(a.nombre)}</span>
+        <span class="item-sub num">${u} u. · ${total} ${total === 1 ? 'talle' : 'talles'} · ${esc(colores.join(', '))}</span>
+        <span class="item-sub num">${conf} de ${total} confirmados</span>
+        <span class="bar"><span style="width:${(conf / total) * 100}%"></span></span>
+      </button></li>`;
+    }).join('')}</ul>`;
+}
+function renderCarril() {
+  const enArt = !!E.sel.remito;
+  $('#carril').classList.toggle('art', enArt);
+  $('.lado').scrollLeft = 0;
+  $('#vista-remitos').inert = enArt;
+  $('#vista-articulos').inert = !enArt;
+}
+
+/* ---------- Panel derecho ---------- */
+function renderDerecha() {
+  const r = remitoSel();
+  if (!r) {
+    $('#derecha').innerHTML = `<div class="panel vacio"><strong>Elegí un remito y después un producto</strong>para ver cómo repartirlo entre Centenario, Sarmiento y el depósito.</div>`;
+    return;
+  }
+  const st = stR(r); const vs = variantesDe(r);
+  const faltan = vs.filter(({ k }) => !confirmada(r, k)).length;
+  const hayError = vs.some(({ k }) => confirmada(r, k) && validar(k, st.conf[k]));
+  let acciones = '', nota = '';
+  if (st.estado === 'pendiente') {
+    acciones = `<button class="btn btn-primary" type="button" data-accion="retomar">Retomar</button>`;
+    nota = `<div class="nota pend">Pendiente desde el ${fecha(st.pendiente.at)} a las ${hora(st.pendiente.at)}, por ${esc(st.pendiente.por)}.${st.pendiente.motivo ? ' Motivo: «' + esc(st.pendiente.motivo) + '».' : ''} Al retomarlo, el stock y la propuesta se recalculan con los datos de hoy.</div>`;
+  } else if (st.estado === 'procesado') {
+    acciones = `<button class="btn" type="button" data-accion="reabrir">Reabrir</button><button class="btn btn-primary" type="button" data-accion="hoja">Ver hoja para imprimir</button>`;
+    nota = `<div class="nota proc">Procesado el ${fecha(st.procesado.at)} a las ${hora(st.procesado.at)}, por ${esc(st.procesado.por)}${st.version > 1 ? ' · Versión ' + st.version : ''}. La distribución quedó registrada y no se edita.</div>`;
+  } else {
+    acciones = `<span class="hint">${faltan ? 'Faltan ' + faltan + (faltan === 1 ? ' talle' : ' talles') + ' por confirmar' : hayError ? 'Hay talles que superan el stock' : 'Todo confirmado'}</span>
+      <button class="btn" type="button" data-accion="pendiente">Dejar pendiente</button>
+      <button class="btn btn-primary" type="button" data-accion="procesar" ${faltan || hayError ? 'disabled' : ''}>Procesar distribución</button>`;
+    if (st.reabierto) nota = `<div class="nota">Reabierto el ${fecha(st.reabierto.at)} a las ${hora(st.reabierto.at)} por ${esc(st.reabierto.por)}. Motivo: «${esc(st.reabierto.motivo)}». Al procesarlo, la hoja sale como versión ${st.version + 1}.</div>`;
+  }
+  const bar = `<div class="panel">
+    <div class="remito-bar">
+      <div><h2>Ingreso N° ${r.numero} ${badgeEstado(st.estado)}</h2>
+        <p class="num">${fecha(r.fecha, true)} ${hora(r.fecha)}${r.remitoProveedor ? ' · Remito del proveedor ' + esc(r.remitoProveedor) : ' · Sin remito del proveedor'} · ${unidades(r)} unidades</p></div>
+      <div class="acciones">${acciones}</div>
+    </div>${nota}</div>`;
+  const a = r.articulos.find((x) => x.codigo === E.sel.articulo);
+  $('#derecha').innerHTML = bar + (a ? renderFicha(r, a) + renderTabla(r, a) : `<div class="panel vacio"><strong>Elegí un producto de la lista</strong>para ver sus colores y talles.</div>`);
+}
+function renderFicha(r, a) {
+  const colores = [...new Set(a.variantes.map((v) => v.colorNombre))];
+  let vCen = 0, vSar = 0;
+  a.variantes.forEach((v) => { const s = VAR[claveVar(a, v)]; vCen += Math.round((s.vCen || 0) * 1.9); vSar += Math.round((s.vSar || 0) * 1.9); });
+  const editable = stR(r).estado === 'nuevo' || stR(r).estado === 'en_curso';
+  return `<div class="panel ficha">
+    <div>
+      <div class="ficha-top"><span>${a.codigo}</span><span class="badge ${a.anterior ? 'b-rep' : 'b-nuevo'}">${a.anterior ? 'Repetido' : 'Nuevo'}</span>
+        ${editable ? `<span class="acciones ficha-acciones"><button class="btn btn-sm btn-primary" type="button" data-accion="aceptar-articulo">Aceptar el artículo</button><button class="btn btn-sm" type="button" data-accion="restablecer">Restablecer</button></span>` : ''}</div>
+      <h3>${esc(a.nombre)}</h3>
+      <dl class="datos">
+        <div><dt>${colores.length === 1 ? 'Color' : 'Colores'}</dt><dd>${esc(colores.join(', '))}</dd></div>
+        <div><dt>Rubro</dt><dd>${esc(a.rubro)}</dd></div>
+        <div><dt>Precio de lista</dt><dd class="num">${pesos(a.precio)}</dd></div>
+        <div><dt>Temporada</dt><dd>${esc(a.temporada)}</dd></div>
+        <div><dt>Ingreso anterior</dt><dd class="num">${a.anterior ? fecha(a.anterior, true) : 'Primer ingreso'}</dd></div>
+        <div><dt>Ventas de la temporada</dt><dd class="num">${a.anterior ? 'Centenario ' + vCen + ' · Sarmiento ' + vSar : 'Sin ventas todavía'}</dd></div>
+      </dl>
+    </div>
+  </div>`;
+}
+function renderTabla(r, a) {
+  const st = stR(r); const editable = st.estado === 'nuevo' || st.estado === 'en_curso';
+  const orden = [...a.variantes].sort((x, y) => x.colorNombre.localeCompare(y.colorNombre) || cmpTalle(x.talle, y.talle));
+  let colorAnt = null; let filas = '';
+  orden.forEach((v) => {
+    if (v.colorNombre !== colorAnt) { colorAnt = v.colorNombre; filas += `<tr class="color-sep"><td colspan="15">${esc(v.color)} — ${esc(v.colorNombre)}</td></tr>`; }
+    filas += filaHtml(r, a, v, editable);
+  });
+  return `<div class="panel">
+    <div class="tabla-wrap"><table>
+      <colgroup><col span="3"><col span="3" class="cg cg-stock"><col span="2" class="cg cg-ventas"><col span="3" class="cg cg-prop"><col span="3" class="cg cg-conf"><col></colgroup>
+      <thead>
+        <tr class="grupo"><th colspan="3"></th><th colspan="3" class="g">Stock actual</th><th colspan="2" class="g">Ventas 60 días</th><th colspan="3" class="g">Propuesta</th><th colspan="3" class="g">Confirmación</th><th></th></tr>
+        <tr><th class="izq">Color</th><th>Talle</th><th>Ingresó</th>
+          <th class="c-dep">Dep.</th><th class="c-cen">Cent.</th><th class="c-sar">Sarm.</th>
+          <th class="c-cen">Cent.</th><th class="c-sar">Sarm.</th>
+          <th class="c-cen">Cent.</th><th class="c-sar">Sarm.</th><th class="c-dep">Dep.</th>
+          <th class="c-cen">Cent.</th><th class="c-sar">Sarm.</th><th class="c-dep">Dep.</th><th class="izq">Estado</th></tr>
+      </thead>
+      <tbody>${filas}</tbody>
+    </table></div>
+    <div class="pie-tabla">El stock del depósito ya incluye este ingreso. Lo que queda en el depósito se calcula solo: es lo que no va a ninguna sucursal.</div>
+  </div>`;
+}
+const n0 = (n) => (n === 0 ? `<span class="cero">0</span>` : n);
+function filaHtml(r, a, v, editable) {
+  const k = claveVar(a, v); const s = VAR[k]; const sug = SUG[k];
+  const val = valores(r, k); const err = validar(k, val);
+  const sugCell = (n, cls) => `<span class="sug ${n ? cls : 'z'}">${n}</span>`;
+  return `<tr class="fila" data-k="${esc(k)}">
+    <td class="izq">${esc(v.colorNombre)}</td>
+    <td><span class="talle">${esc(v.talle || 'Único')}</span>${v.nueva ? ' <span class="badge b-var" title="Esta combinación de color y talle entra por primera vez">Nuevo</span>' : ''}</td>
+    <td class="ingreso num">${v.ingreso}</td>
+    <td class="num">${n0(s.dep)}</td><td class="num">${n0(s.cen)}</td><td class="num">${n0(s.sar)}</td>
+    <td class="num">${s.vCen === null ? '<span class="cero">—</span>' : n0(s.vCen)}</td><td class="num">${s.vSar === null ? '<span class="cero">—</span>' : n0(s.vSar)}</td>
+    <td>${sugCell(sug.cen, 'cen')}</td><td>${sugCell(sug.sar, 'sar')}</td><td>${sugCell(sug.dep, 'dep')}</td>
+    <td>${stepperHtml(k, 'cen', val, err, editable, v)}</td>
+    <td>${stepperHtml(k, 'sar', val, err, editable, v)}</td>
+    <td><span class="calc num ${err ? 'error' : ''}" data-dep>${err ? '—' : libreDe(k) - val.cen - val.sar}</span></td>
+    <td class="estado-celda" data-estado>${estadoCelda(r, k, err, editable)}</td>
+  </tr>`;
+}
+/* Límites de los botones: el «−» no baja de 0 y el «+» no pasa lo que hay en el depósito. */
+function limitesPaso(k, campo, val) {
+  const valido = Number.isInteger(val.cen) && Number.isInteger(val.sar);
+  return { menos: !valido || !(val[campo] > 0), mas: !valido || val.cen + val.sar >= libreDe(k) };
+}
+function stepperHtml(k, campo, val, err, editable, v) {
+  const nombre = UB[campo]; const lim = limitesPaso(k, campo, val);
+  const dis = (b) => (!editable || b ? 'disabled' : '');
+  return `<span class="stepper ${campo} ${err ? 'error' : ''} ${editable ? '' : 'off'}" data-stepper="${campo}">
+    <input class="campo" id="${campo}-${esc(k)}" data-campo="${campo}" inputmode="numeric" aria-label="${nombre}, talle ${esc(v.talle)} ${esc(v.colorNombre)}" value="${Number.isInteger(val[campo]) ? val[campo] : ''}" ${editable ? '' : 'disabled'}>
+    <span class="pasos"><button type="button" class="paso" data-paso="1" data-campo="${campo}" tabindex="-1" aria-label="Sumar uno a ${nombre}" ${dis(lim.mas)}>+</button><button type="button" class="paso" data-paso="-1" data-campo="${campo}" tabindex="-1" aria-label="Restar uno a ${nombre}" ${dis(lim.menos)}>−</button></span>
+  </span>`;
+}
+function estadoCelda(r, k, err, editable) {
+  const st = stR(r); const c = st.conf[k];
+  if (confirmada(r, k)) {
+    return `<span class="ok">✓ Confirmado</span>${corregida(c) ? ' <span class="chip">Corregido</span>' : ''}${c.ajustado ? ' <span class="chip warn">Ajustado al stock</span>' : ''}${err ? `<span class="err-msg">${err}</span>` : ''}`;
+  }
+  if (!editable) return `<span class="muted">Sin confirmar</span>`;
+  return `<button class="btn btn-sm" type="button" data-accion="aceptar" ${err ? 'disabled' : ''}>Aceptar</button>${err ? `<span class="err-msg">${err}</span>` : ''}`;
+}
+
+function renderTodo() { renderKpis(); renderRemitos(); renderArticulos(); renderCarril(); renderDerecha(); }
+
+/* ---------- Acciones ---------- */
+function aceptar(r, k) {
+  const st = stR(r); const val = valores(r, k);
+  if (validar(k, val)) return;
+  st.conf[k] = { cen: val.cen, sar: val.sar, sug: { ...SUG[k] }, por: USUARIO, at: ahora() };
+  delete st.draft[k];
+  if (st.estado === 'nuevo') st.estado = 'en_curso';
+}
+function actualizarFila(tr) {
+  const r = remitoSel(); const k = tr.dataset.k;
+  const val = valores(r, k); const err = validar(k, val);
+  tr.querySelectorAll('.stepper').forEach((g) => {
+    g.classList.toggle('error', !!err);
+    const lim = limitesPaso(k, g.dataset.stepper, val);
+    g.querySelector('[data-paso="1"]').disabled = lim.mas;
+    g.querySelector('[data-paso="-1"]').disabled = lim.menos;
+  });
+  const dep = tr.querySelector('[data-dep]');
+  dep.textContent = err ? '—' : libreDe(k) - val.cen - val.sar;
+  dep.classList.toggle('error', !!err);
+  tr.querySelector('[data-estado]').innerHTML = estadoCelda(r, k, err, true);
+  renderKpis(); renderArticulos();
+  const faltan = variantesDe(r).filter(({ k: kk }) => !confirmada(r, kk)).length;
+  const btn = $('[data-accion="procesar"]'); const hint = $('.remito-bar .hint');
+  if (btn) btn.disabled = faltan > 0;
+  if (hint) hint.textContent = faltan ? 'Faltan ' + faltan + (faltan === 1 ? ' talle' : ' talles') + ' por confirmar' : 'Todo confirmado';
+}
+
+function dialogo({ titulo, texto, etiqueta, obligatorio, confirmar, alConfirmar }) {
+  $('#capa').innerHTML = `<div class="overlay" role="presentation"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t">
+    <h2 id="dlg-t">${titulo}</h2><p>${texto}</p>
+    <label for="dlg-m">${etiqueta}</label><textarea id="dlg-m" maxlength="500"></textarea>
+    <span class="error-txt" id="dlg-e" hidden>Escribí el motivo para continuar.</span>
+    <div class="acciones"><button class="btn" type="button" id="dlg-no">Cancelar</button><button class="btn btn-primary" type="button" id="dlg-si">${confirmar}</button></div>
+  </div></div>`;
+  const cerrar = () => { $('#capa').innerHTML = ''; };
+  $('#dlg-m').focus();
+  $('#dlg-no').onclick = cerrar;
+  $('.overlay').onclick = (e) => { if (e.target.classList.contains('overlay')) cerrar(); };
+  $('#dlg-si').onclick = () => {
+    const m = $('#dlg-m').value.trim();
+    if (obligatorio && !m) { $('#dlg-e').hidden = false; $('#dlg-m').focus(); return; }
+    cerrar(); alConfirmar(m);
+  };
+}
+function mostrarHoja(r) {
+  const st = stR(r);
+  const filas = r.articulos.flatMap((a) => [...a.variantes].sort((x, y) => x.colorNombre.localeCompare(y.colorNombre) || cmpTalle(x.talle, y.talle)).map((v) => ({ a, v, c: st.conf[claveVar(a, v)] })));
+  const t = { i: 0, cen: 0, sar: 0, dep: 0 };
+  const cuerpo = filas.map(({ a, v, c }) => {
+    const dep = libreDe(claveVar(a, v)) - c.cen - c.sar;
+    t.i += v.ingreso; t.cen += c.cen; t.sar += c.sar; t.dep += dep;
+    return `<tr><td class="izq">${a.codigo}</td><td class="izq">${esc(a.nombre)}</td><td class="izq">${esc(v.colorNombre)}</td><td>${esc(v.talle || 'Único')}</td><td class="num">${v.ingreso}</td><td class="num">${c.cen}</td><td class="num">${c.sar}</td><td class="num">${dep}</td></tr>`;
+  }).join('');
+  $('#capa').innerHTML = `<div class="overlay" role="presentation"><div class="hoja-wrap" role="dialog" aria-modal="true" aria-label="Hoja para imprimir">
+    <div class="hoja-bar"><span>Vista previa de la hoja. En el sistema se descarga en PDF, las veces que haga falta.</span><button class="btn btn-sm" type="button" id="hoja-x">Cerrar</button></div>
+    <div class="hoja">
+      <h2>DISTRIBUCIÓN DEL INGRESO N° ${r.numero}</h2>
+      <p class="meta"><span>Ingreso: ${fecha(r.fecha, true)}</span>${r.remitoProveedor ? `<span>Remito del proveedor: ${esc(r.remitoProveedor)}</span>` : ''}<span>Procesado por: ${esc(st.procesado.por)}</span><span>Fecha de proceso: ${fecha(st.procesado.at, true)} ${hora(st.procesado.at)}</span>${st.version > 1 ? `<span><strong>Versión ${st.version}</strong></span>` : ''}</p>
+      <table><thead><tr><th class="izq">Artículo</th><th class="izq">Descripción</th><th class="izq">Color</th><th>Talle</th><th>Ingresó</th><th>Centenario</th><th>Sarmiento</th><th>Depósito</th></tr></thead>
+      <tbody>${cuerpo}</tbody>
+      <tfoot><tr><td class="izq" colspan="4">Total</td><td class="num">${t.i}</td><td class="num">${t.cen}</td><td class="num">${t.sar}</td><td class="num">${t.dep}</td></tr></tfoot></table>
+    </div></div></div>`;
+  const cerrar = () => { $('#capa').innerHTML = ''; };
+  $('#hoja-x').onclick = cerrar; $('#hoja-x').focus();
+  $('.overlay').onclick = (e) => { if (e.target.classList.contains('overlay')) cerrar(); };
+}
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('#capa').innerHTML) $('#capa').innerHTML = ''; });
+
+document.addEventListener('change', (e) => {
+  if (e.target.id === 'solo') { E.soloSinProcesar = e.target.checked; guardar(); renderRemitos(); }
+});
+
+function fijarValor(tr, campo, n) {
+  const r = remitoSel(); const k = tr.dataset.k;
+  const st = stR(r); const actual = valores(r, k);
+  st.draft[k] = { ...actual, [campo]: n };
+  const c = st.conf[k];
+  if (c && st.draft[k].cen === c.cen && st.draft[k].sar === c.sar) delete st.draft[k];
+  guardar(); actualizarFila(tr);
+}
+function pasar(tr, campo, delta) {
+  const input = tr.querySelector(`.campo[data-campo="${campo}"]`);
+  if (!input || input.disabled) return;
+  const k = tr.dataset.k; const val = valores(remitoSel(), k);
+  const lim = limitesPaso(k, campo, val);
+  if ((delta > 0 && lim.mas) || (delta < 0 && lim.menos)) return;
+  const n = (Number.isInteger(val[campo]) ? val[campo] : 0) + delta;
+  input.value = n;
+  fijarValor(tr, campo, n);
+}
+document.addEventListener('input', (e) => {
+  const campo = e.target.closest('.campo'); if (!campo) return;
+  const txt = campo.value.trim();
+  fijarValor(campo.closest('tr'), campo.dataset.campo, txt === '' ? NaN : Number(txt));
+});
+document.addEventListener('keydown', (e) => {
+  const campo = e.target.closest && e.target.closest('.campo');
+  if (!campo || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+  e.preventDefault();
+  pasar(campo.closest('tr'), campo.dataset.campo, e.key === 'ArrowUp' ? 1 : -1);
+});
+
+document.addEventListener('click', (e) => {
+  const t = e.target;
+  const paso = t.closest('[data-paso]');
+  if (paso) { pasar(paso.closest('tr'), paso.dataset.campo, Number(paso.dataset.paso)); return; }
+  const bRem = t.closest('[data-remito]');
+  if (bRem) {
+    const r = REMITOS.find((x) => x.codigo === bRem.dataset.remito);
+    E.sel = { remito: r.codigo, articulo: r.articulos[0]?.codigo || null };
+    guardar(); renderTodo(); $('#volver')?.focus({ preventScroll: true }); return;
+  }
+  if (t.closest('#volver')) { E.sel = { remito: null, articulo: null }; guardar(); renderTodo(); $('#vista-remitos .item')?.focus({ preventScroll: true }); return; }
+  const bArt = t.closest('[data-articulo]');
+  if (bArt) { E.sel.articulo = bArt.dataset.articulo; guardar(); renderArticulos(); renderDerecha(); return; }
+  const acc = t.closest('[data-accion]'); if (!acc) return;
+  const r = remitoSel(); if (!r) return; const st = stR(r);
+  const a = r.articulos.find((x) => x.codigo === E.sel.articulo);
+  switch (acc.dataset.accion) {
+    case 'aceptar': aceptar(r, acc.closest('tr').dataset.k); break;
+    case 'aceptar-articulo': a.variantes.forEach((v) => aceptar(r, claveVar(a, v))); break;
+    case 'restablecer': a.variantes.forEach((v) => { const k = claveVar(a, v); delete st.conf[k]; delete st.draft[k]; });
+      if (st.estado === 'en_curso' && !Object.keys(st.conf).length) st.estado = 'nuevo'; break;
+    case 'pendiente':
+      dialogo({ titulo: 'Dejar pendiente', texto: 'Lo que ya confirmaste queda guardado. Al retomarlo, el stock y la propuesta se recalculan con los datos de ese día.', etiqueta: 'Motivo (opcional)', obligatorio: false, confirmar: 'Dejar pendiente',
+        alConfirmar: (m) => { st.estado = 'pendiente'; st.pendiente = { motivo: m, por: USUARIO, at: ahora() }; E.sel = { remito: null, articulo: null }; guardar(); renderTodo(); } });
+      return;
+    case 'retomar': {
+      st.estado = Object.keys(st.conf).length ? 'en_curso' : 'nuevo';
+      Object.entries(st.conf).forEach(([k, c]) => {
+        const libre = libreDe(k);
+        while (c.cen + c.sar > libre) { if (c.cen >= c.sar && c.cen > 0) c.cen--; else if (c.sar > 0) c.sar--; else break; c.ajustado = true; }
+        c.sug = { ...SUG[k] };
+      });
+      st.pendiente = null; break;
+    }
+    case 'procesar':
+      st.estado = 'procesado'; st.version += 1; st.procesado = { por: USUARIO, at: ahora() }; st.draft = {}; st.reabierto = null;
+      guardar(); renderTodo(); mostrarHoja(r); return;
+    case 'hoja': mostrarHoja(r); return;
+    case 'reabrir':
+      dialogo({ titulo: 'Reabrir el remito', texto: 'Vuelve a «En curso» con lo confirmado. Al procesarlo de nuevo, la hoja sale como versión ' + (st.version + 1) + '.', etiqueta: 'Motivo', obligatorio: true, confirmar: 'Reabrir',
+        alConfirmar: (m) => { st.estado = 'en_curso'; st.reabierto = { motivo: m, por: USUARIO, at: ahora() }; guardar(); renderTodo(); } });
+      return;
+  }
+  guardar(); renderTodo();
+});
+
+let temporizadorAviso = null;
+function avisar(texto) {
+  const t = $('#toast'); t.textContent = texto; t.hidden = false;
+  clearTimeout(temporizadorAviso); temporizadorAviso = setTimeout(() => { t.hidden = true; }, 2500);
+}
+$('#reiniciar').addEventListener('click', () => {
+  E = estadoInicial();
+  $('#capa').innerHTML = '';
+  renderTodo();
+  window.scrollTo(0, 0);
+  avisar('Demo reiniciada: todos los remitos vuelven a estar sin tocar.');
+});
+
+renderTodo();
+</script>
+
+</body></html>
